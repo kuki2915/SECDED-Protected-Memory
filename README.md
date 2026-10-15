@@ -11,7 +11,7 @@ The project will cover:
 - Injecting errors during simulation to check the decoder.
 - Using a reference model, scoreboard, assertions, and functional coverage to verify the design.
  
-ECC format
+### ECC format
 The plan is to protect each 32-bit data word using extended Hamming SECDED. This requires 6 Hamming parity bits and 1 overall parity bit, giving a total codeword width of 39 bits.
 The Hamming code uses even parity. The Hamming positions are numbered from 1 to 38, with parity bits at positions 1, 2, 4, 8, 16, and 32. The remaining positions hold the 32 data bits, and the overall parity bit is stored separately.
 The decoder calculates a syndrome and checks the overall parity to decide whether the word is clean, has a correctable single-bit error, or has an uncorrectable double-bit error.
@@ -22,7 +22,7 @@ Zero	1	Error in the overall parity bit
 Nonzero	0	Double-bit error detected
 
 
-SECDED can correct single-bit errors and detect double-bit errors. It does not guarantee correct handling of every error involving three or more flipped bits.
+### SECDED can correct single-bit errors and detect double-bit errors. It does not guarantee correct handling of every error involving three or more flipped bits.
 Planned modules
 secded_encoder.sv
 Takes 32-bit data and produces a 39-bit codeword. It places the data in the non-parity positions and calculates the parity bits.
@@ -34,13 +34,13 @@ ecc_memory_tb.sv
 The testbench will drive the design, keep track of expected data, inject faults, compare outputs, and collect coverage.
 Verification plan
 I’ll start with simple directed tests and then move to more extensive testing.
-Basic tests
+### Basic tests
 - Write data and read it back without errors.
 - Test all-zero, all-one, alternating-bit, and random data patterns.
 - Write and read every memory address.
 - Overwrite a location and check that the new data is returned.
 - Check reset behavior and read/write timing.
-Error-injection tests
+### Error-injection tests
 A 39-bit codeword has:
 - 39 possible single-bit error locations.
 - 741 unique two-bit error combinations (39 choose 2).
@@ -69,5 +69,6 @@ Assertions and coverage	Planned
 
 What I want to learn
 Through this project, I want to get more comfortable with SystemVerilog RTL, ECC logic, self-checking testbenches, scoreboards, fault injection, assertions, and functional coverage. Once the basic version works, I may add features such as error scrubbing or an FPGA demonstration.
-Author: SIDDHESH SINGH
-Project focus: Digital Design Verification, SystemVerilog, and ECC
+
+### Author: SIDDHESH SINGH
+### Project focus: Digital Design Verification, SystemVerilog, and ECC
